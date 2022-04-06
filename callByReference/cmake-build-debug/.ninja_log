@@ -1,0 +1,5 @@
+# ninja log v5
+14	25	1649209259929563756	callByValueVsCallByReference	d05d25372780faa7
+0	14	1649209259921563704	CMakeFiles/callByValueVsCallByReference.dir/main.c.o	eb07dd66d6b3e0ee
+0	14	1649209411666365098	CMakeFiles/callByValueVsCallByReference.dir/main.c.o	38d8b8bce2e21f25
+14	25	1649209411678365145	callByValueVsCallByReference	d05d25372780faa7
