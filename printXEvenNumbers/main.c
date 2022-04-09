@@ -11,10 +11,10 @@ int main() {
 
 int printValue(int number) {
     if (number == 0) {
-        return 0;
+        return 2;
     }
     else {
-        printf("%d\n", number);
-        printValue(number-1);
+        printf("%d\n", number * 2);
+        return printValue(number-1);
     }
 }
