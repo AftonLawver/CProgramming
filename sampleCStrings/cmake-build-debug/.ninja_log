@@ -1,0 +1,25 @@
+# ninja log v5
+0	3524	6716647449084058	CMakeFiles/sampleCStrings.dir/main.c.obj	680879a6e98cec4d
+3526	5466	6716647468460177	sampleCStrings.exe	7f3cfbffe10df187
+2	344	6716648736515338	CMakeFiles/sampleCStrings.dir/main.c.obj	680879a6e98cec4d
+345	810	6716648741107454	sampleCStrings.exe	7f3cfbffe10df187
+2	639	6716649028817797	CMakeFiles/sampleCStrings.dir/main.c.obj	680879a6e98cec4d
+640	1066	6716649033208266	sampleCStrings.exe	7f3cfbffe10df187
+2	759	6716649248538446	CMakeFiles/sampleCStrings.dir/main.c.obj	680879a6e98cec4d
+759	1607	6716649256944703	sampleCStrings.exe	7f3cfbffe10df187
+2	1606	6716700502551178	CMakeFiles/sampleCStrings.dir/main.c.obj	680879a6e98cec4d
+1607	4381	6716700530419243	sampleCStrings.exe	7f3cfbffe10df187
+2	813	6716700760002812	CMakeFiles/sampleCStrings.dir/main.c.obj	680879a6e98cec4d
+814	1474	6716700766565406	sampleCStrings.exe	7f3cfbffe10df187
+2	497	6716701060422287	CMakeFiles/sampleCStrings.dir/main.c.obj	680879a6e98cec4d
+498	1126	6716701066645921	sampleCStrings.exe	7f3cfbffe10df187
+3	411	6716702352115877	CMakeFiles/sampleCStrings.dir/main.c.obj	680879a6e98cec4d
+412	870	6716702356641518	sampleCStrings.exe	7f3cfbffe10df187
+2	788	6716703386359610	CMakeFiles/sampleCStrings.dir/main.c.obj	680879a6e98cec4d
+789	1413	6716703393131911	sampleCStrings.exe	7f3cfbffe10df187
+2	650	6716704226290584	CMakeFiles/sampleCStrings.dir/main.c.obj	680879a6e98cec4d
+651	1071	6716704230425092	sampleCStrings.exe	7f3cfbffe10df187
+2	828	6716712134263743	CMakeFiles/sampleCStrings.dir/main.c.obj	680879a6e98cec4d
+828	1716	6716712143083615	sampleCStrings.exe	7f3cfbffe10df187
+2	194	6716712408829801	CMakeFiles/sampleCStrings.dir/main.c.obj	680879a6e98cec4d
+195	480	6716712411639645	sampleCStrings.exe	7f3cfbffe10df187
