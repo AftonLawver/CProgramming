@@ -1,0 +1,3 @@
+C:/Users/lawve/Desktop/CProgramming/fahrenheitToCelsius/cmake-build-debug/CMakeFiles/testerFile.dir
+C:/Users/lawve/Desktop/CProgramming/fahrenheitToCelsius/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/lawve/Desktop/CProgramming/fahrenheitToCelsius/cmake-build-debug/CMakeFiles/rebuild_cache.dir
