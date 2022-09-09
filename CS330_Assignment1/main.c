@@ -11,7 +11,7 @@ typedef struct Node
 // function declaration
 void display(struct Node *head);
 void concatenateList(struct Node *h1, struct Node *h2);
-int insertNode(struct Node *head, int index, int value);
+int insertNode(struct Node *h1, int index, int value);
 
 int main() {
 
@@ -84,10 +84,11 @@ Node* newNode(int data) {
 // insert node into the linked list at a user-defined position
 // will return 0 if successful and 1 if unsuccessful
 int insertNode(struct Node *head, int index, int value) {
-
     return 0;
-
 }
+
+// removeDuplicates will remove all duplicate items from the list
+
 
 
 void concatenateList(struct Node *h1, struct Node *h2) {
