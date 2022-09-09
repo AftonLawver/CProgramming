@@ -1,15 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node
+
+typedef struct Node
 {
     int data;
     struct Node *next;
-};
+}Node;
 
 // function declaration
 void display(struct Node *head);
 void concatenateList(struct Node *h1, struct Node *h2);
+int insertNode(struct Node *head, int index, int value);
 
 int main() {
 
@@ -50,29 +52,41 @@ int main() {
             prev2->next=p2;
         prev2=p2;
     }
-    printf("%s", "Second list: \n");
+    printf("%s", "Second list:\n");
     display(head2);
 
+    // concatenate the two linked lists
     concatenateList(head, head2);
-    printf("%s", "New first list:");
+    printf("%s", "New first list:\n");
     display(head);
-    printf("%s", "New second list (nothing should be changed):");
+    printf("%s", "New second list (nothing should be changed):\n");
     display(head2);
-
 
     return 0;
 }
 
-
 // for testing purposes
-void display(struct Node *head) {
-    if(head == NULL) {
-        printf("NULL\n");
+void display(struct Node *node) {
+    while (node != NULL) {
+        printf("%d\n", node->data);
+        node = node->next;
     }
-    else {
-        printf("%d\n", head -> data);
-        display(head -> next);
-    }
+}
+
+// utility function to create a new node
+Node* newNode(int data) {
+    Node* temp = (Node*)malloc(sizeof(Node));
+    temp->data = data;
+    temp->next = NULL;
+    return temp;
+}
+
+// insert node into the linked list at a user-defined position
+// will return 0 if successful and 1 if unsuccessful
+int insertNode(struct Node *head, int index, int value) {
+
+    return 0;
+
 }
 
 

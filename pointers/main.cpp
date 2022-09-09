@@ -2,6 +2,9 @@
 
 using namespace std;
 
+void getNumber(int *value);
+void doubleValue(int *value);
+
 int main() {
     // showing the size and address of a variable
 //    int x;
@@ -70,5 +73,51 @@ int main() {
 //    for (count=0; count < SIZE; count++)
 //        cout << "The value of element " << count << " is: " << *(numbers + count) << "\n";
 
+
+// can also print all values in an array by using subscript notation with the pointer
+//    const int SIZE = 3;
+//    int numbers[SIZE] = {3,4,5};
+//    int *ptr;
+//    ptr = numbers; // array names can be used as pointers, so dont need &.
+//    int count;
+//
+//    cout << "The numbers in the array are: \n";
+//    for(count = 0; count < SIZE; count++) {
+//        cout << numbers[count] << endl;
+//    }
+
+// We can increment (or decrement) a pointer variable so that it
+// shows us all of the elements in an array
+
+//const int SIZE = 5;
+//int nums[SIZE] = {1,2,3,4,5};
+//int *numPtr = nullptr;
+//numPtr = nums;
+//int count = 0;
+//
+//for(count; count<SIZE; count++) {
+//    cout << *numPtr << endl;
+//    *numPtr ++;
+//}
+
+
+// use a pointer as an argument in some functions, manipulate that
+// value it points to
+
+    int number;
+    getNumber(&number);
+    cout << "Number is: " << number << endl;
+    doubleValue(&number);
+    cout << "That number doubled is: " << number << endl;
+
     return 0;
+}
+
+void getNumber(int *value) {
+   cout << "Type a number: " << endl;
+   cin >> *value;
+}
+
+void doubleValue(int *value) {
+    *value *=2;
 }
