@@ -25,17 +25,20 @@ private:
 
 };
 
-
 Node* List::InsertNode(int index, double x) {
 	if (index < 0 || x < 0) return NULL;
 
 	int currIndex	=	1;
-	Node* currNode	=	head;
+	Node *currNode	=	head;
 	while (currNode && index > currIndex) {
+
 		currNode	=	currNode->next;
 		currIndex++;
 	}
-	if (index > 0 && currNode == NULL) return NULL;
+
+	if (index > 0 && currNode == NULL) {
+        return NULL;
+    }
 
 	Node* newNode	=	new	Node;
 	newNode->data	=	x;
@@ -122,18 +125,15 @@ double List::MaxVal() {
 
 int main() {
     List list;
-    List list2;
-    list.InsertNode(0, -1);
-    cout << "This is the list of values: " << endl;
+    Node *myNode = list.InsertNode(5, 2);
     list.DisplayList();
 
-//    double result = list.MaxVal();
-//    cout << "max value is: " << result << endl;
-//
-//    list.removeDuplicates();
-//    cout << "This is the new list of values after removing the duplicates: ";
-//    list.DisplayList();
-//
+    double result = list.MaxVal();
+    cout << "max value is: " << result << endl;
+
+    list.removeDuplicates();
+    cout << "This is the new list of values after removing the duplicates: ";
+    list.DisplayList();
 
     return 0;
 }
