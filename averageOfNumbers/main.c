@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 
 int main() {
 
@@ -26,12 +27,13 @@ int main() {
     printf("The average of these numbers is: %f\n", average);
     printf("Press ENTER key to Continue\n");
     char button;
-    fflush(stdin);
+
+    // Purge the remaining whitespace in buffer
+    getchar();
+
     scanf("%c", &button);
     if (button == 10) {
         return 0;
     }
-
-
 }
 

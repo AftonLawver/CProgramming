@@ -22,20 +22,24 @@
 	John Woods
 */
 
-#include <cmath>
+#include <cmath> // import cmath for use of pow() function
 #include <iostream>
 
-using namespace std;
+using namespace std; // use the std namespace so we can use functions from it like cout and cin
 
-int to_binary(int input)
+int to_binary(int input) // function called to_binary that takes in an integer and also returns and integer
 {
-    int result = 0;
+    int result = 0; // initialize a integer variable called result and set it to 0
 
-    for(int i = 0; input > 0; i++)
+    for(int i = 0; input > 0; i++)  // everytime input is greater than 0, we go through the for loop
+                                    // and increment i each time.
     {
-        result = result + ((input % 2) * pow(10, i));
+        result = result + ((input % 2) * pow(10, i));   // we set the value of result to the previous result
+                                                            // and add the input modulo 2 multiplied by 10 to the power
+                                                            // of i. This gives us a binary number (either 1 or 0)
+                                                            // multiplied by 10 to the power of some value.
 
-        input = input / 2;
+        input = input / 2;              // divide the current input by 2 to see if input equals 0.
     }
 
     return result;
