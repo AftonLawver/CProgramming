@@ -5,28 +5,52 @@
 using namespace std;
 
 bool is_prime(int input);
+void print_factorization(int input);
 
 int main() {
-    bool result = is_prime(43);
-    if (result == true) {
-        cout << "Number is prime." << endl;
-    }
-    else if (result == false) {
-        cout << "Number is not prime." << endl;
-    }
+    print_factorization(36);
+//    bool result = is_prime(6);
+//    if (result == true) {
+//        cout << "Number is prime." << endl;
+//    }
+//    else if (result == false) {
+//        cout << "Number is not prime." << endl;
+//    }
     return 0;
 }
 
+void print_factorization(int input) {
+    if( !is_prime(input) )
+    {
+        // recurse
+        for (int i = 2; i < input; i++) {
+            if (input % i == 0) {
+                cout << i << endl;
+                input = input / i;
+                print_factorization(input);
+            }
+            else {
+                continue;
+            }
+        }
+
+
+    }
+    else
+    {
+        // base case, end recursion.
+        cout << input << endl;
+    }
+}
+
 bool is_prime(int input) {
-    if (input <= 2) {
+    // Corner case
+    if (input <= 1)
         return false;
-    }
-    for (int i = 2; i <= sqrt(input); i++) {
-        if (input % i == 0) {
+
+    // Check from 2 to n-1
+    for (int i = 2; i < input; i++)
+        if (input % i == 0)
             return false;
-        }
-        else {
-            return true;
-        }
-    }
+    return true;
 }
