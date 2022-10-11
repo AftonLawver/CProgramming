@@ -9,9 +9,9 @@ using namespace std;
 
 int main() {
     int number;
-    cout << "Please enter a postive integer number: " << endl;
+    cout << "Please enter a positive integer number: " << endl;
     while ((!(cin >> number)) || number < 2) {
-        cout << "Please enter a postive integer number: " << endl;
+        cout << "Please enter a positive integer number: " << endl;
         cin.clear();
         cin.ignore(100, '\n');
     }

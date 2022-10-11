@@ -1,6 +1,4 @@
 #include <iostream>
-#include <cmath>
-
 
 using namespace std;
 
@@ -8,47 +6,57 @@ bool is_prime(int input);
 void print_factorization(int input);
 
 int main() {
-    print_factorization(36);
-//    bool result = is_prime(6);
-//    if (result == true) {
-//        cout << "Number is prime." << endl;
-//    }
-//    else if (result == false) {
-//        cout << "Number is not prime." << endl;
-//    }
-    return 0;
+    int input;
+    cout << "Welcome to the prime factor calculator!" << endl;
+    int count = 0;
+    while(true) {
+        if (count >=1) {
+            cout << "Please enter another number: " << endl;
+        }
+        else {
+            cout << "Please enter a number: " << endl;
+        }
+        while ((!(cin >> input))) {
+
+            cout << "Invalid input..Please enter a valid integer: " << endl;
+            cin.clear();
+            cin.ignore(100, '\n');
+        }
+        if (input <= 0) {
+            return 0;
+        }
+        else {
+            bool isPrime = is_prime(input);
+            if (isPrime) {
+                cout << "Number is prime." << endl;
+            }
+            else {
+                cout << "Prime factors:" << endl;
+                print_factorization(input);
+            }
+            count ++;
+        }
+    }
 }
 
 void print_factorization(int input) {
-    if( !is_prime(input) )
-    {
-        // recurse
-        for (int i = 2; i < input; i++) {
-            if (input % i == 0) {
-                cout << i << endl;
-                input = input / i;
-                print_factorization(input);
-            }
-            else {
-                continue;
-            }
-        }
-
-
+    if (!is_prime(input)) {
+        int num = 2;
+        while (input % num != 0) num++;
+        cout << num << endl;
+        print_factorization(input/num);
     }
-    else
-    {
-        // base case, end recursion.
+    else {
         cout << input << endl;
     }
-}
+    }
+
+
 
 bool is_prime(int input) {
-    // Corner case
     if (input <= 1)
         return false;
 
-    // Check from 2 to n-1
     for (int i = 2; i < input; i++)
         if (input % i == 0)
             return false;
