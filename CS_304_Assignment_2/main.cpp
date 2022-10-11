@@ -11,10 +11,10 @@ int main() {
     int count = 0;
     while(true) {
         if (count >=1) {
-            cout << "Please enter another number: " << endl;
+            cout << "Please enter another number or enter 0 to exit: " << endl;
         }
         else {
-            cout << "Please enter a number: " << endl;
+            cout << "Please enter a number or enter 0 to exit: " << endl;
         }
         while ((!(cin >> input))) {
 
