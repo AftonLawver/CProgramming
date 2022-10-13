@@ -1,11 +1,67 @@
 #include <iostream>
+#include <unistd.h>
+#include <vector>
+
 
 using namespace std;
 
-void getNumber(int *value);
+int multiplyNumbers(int *value1, int *value2, int *value3);
 void doubleValue(int *value);
+int findMaxInArray(int myArray[], int size);
+int findMaxInVector(vector<int> *myVector);
+
 
 int main() {
+
+    vector <int> myVector = {5,9,15,41,12,72};
+    vector<int> *p = &myVector;
+    int result = findMaxInVector(p);
+    cout << result << endl;
+
+
+
+
+// for findMaxInArray function
+//    int myNumbers[5] = {10,20,45,15, 19};
+//    int result = findMaxInArray(myNumbers, 4);
+//    cout << result << endl;
+
+//    int x=5, y=3, z=4;
+//    int *ptr1 = &x;
+//    int *ptr2 = &y;
+//    int *ptr3 = &z;
+//
+//    int result = multiplyNumbers(ptr1, ptr2, ptr3);
+//    cout << result << endl;
+
+//    int x, y, z;
+//    int *pointerX = &x;
+//    int *pointerY = &y;
+//    int *pointerZ = &z;
+//
+//    cout << "Enter a number: " << endl;
+//    cin >> *pointerX;
+//
+//    cout << "Enter a number: " << endl;
+//    cin >> *pointerY;
+//
+//    cout << "Original value of x: " << *pointerX << endl;
+//    cout << "Original value of Y: " << *pointerY << endl;
+//
+//    cout << "Swapping values.";
+//    sleep(1);
+//    cout << ".";
+//    sleep(1);
+//    cout << ".";
+//    sleep(1);
+//    cout << "." << endl;
+//
+//    *pointerZ = *pointerX;
+//    *pointerX = *pointerY;
+//    *pointerY = *pointerZ;
+//    cout << "New value of x: " << *pointerX << endl;
+//    cout << "New value of y: " << *pointerY << endl;
+
     // showing the size and address of a variable
 //    int x;
 //    x = 25;
@@ -104,19 +160,40 @@ int main() {
 // use a pointer as an argument in some functions, manipulate that
 // value it points to
 
-    int number;
-    getNumber(&number);
-    cout << "Number is: " << number << endl;
-    doubleValue(&number);
-    cout << "That number doubled is: " << number << endl;
+//    int number;
+//    getNumber(&number);
+//    cout << "Number is: " << number << endl;
+//    doubleValue(&number);
+//    cout << "That number doubled is: " << number << endl;
 
     return 0;
 }
 
-void getNumber(int *value) {
-   cout << "Type a number: " << endl;
-   cin >> *value;
+int multiplyNumbers(int *value1, int *value2, int *value3) {
+   return *value1 * *value2 * *value3;
 }
+
+int findMaxInArray(int myArray[], int size) {
+    int max = myArray[0];
+    for (int i = 0; i < size; i++) {
+        if (myArray[i] > max) {
+            max = myArray[i];
+        }
+    }
+    return max;
+}
+
+int findMaxInVector(vector<int> *myVector) {
+    int max = myVector->at(0);
+    for (int i = 0; i < myVector->size(); i++) {
+        if (myVector->at(i) > max) {
+            max = myVector->at(i);
+        }
+    }
+    return max;
+}
+
+
 
 void doubleValue(int *value) {
     *value *=2;
