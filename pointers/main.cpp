@@ -9,17 +9,24 @@ int multiplyNumbers(int *value1, int *value2, int *value3);
 void doubleValue(int *value);
 int findMaxInArray(int myArray[], int size);
 int findMaxInVector(vector<int> *myVector);
-
+void printArray(int myArray[], int size);
+int numberOfA(char *charArray);
 
 int main() {
 
-    vector <int> myVector = {5,9,15,41,12,72};
-    vector<int> *p = &myVector;
-    int result = findMaxInVector(p);
-    cout << result << endl;
+// To test out the numberOfA function
+//    char myCharArray[6] = {'H','a','n','n','a','h'};
+//    int result = numberOfA(myCharArray);
+//    cout << result << endl;
 
+//    int myNumbers[5] = {10,20,45,15, 19};
+//    printArray(myNumbers, 5);
 
-
+    // for findMaxInVector function
+//    vector <int> myVector = {5,9,15,41,12,72};
+//    vector<int> *p = &myVector;
+//    int result = findMaxInVector(p);
+//    cout << result << endl;
 
 // for findMaxInArray function
 //    int myNumbers[5] = {10,20,45,15, 19};
@@ -143,7 +150,7 @@ int main() {
 //    }
 
 // We can increment (or decrement) a pointer variable so that it
-// shows us all of the elements in an array
+// shows us all the elements in an array
 
 //const int SIZE = 5;
 //int nums[SIZE] = {1,2,3,4,5};
@@ -194,6 +201,23 @@ int findMaxInVector(vector<int> *myVector) {
 }
 
 
+void printArray(int myArray[], int size) {
+    for (int i = 0; i < size; i++) {
+        cout << *(myArray + i) << endl;
+    }
+}
+
+int numberOfA(char *charArray) {
+    int i = 0;
+    int count = 0;
+    while (*(charArray + i) != NULL) {
+        if (*(charArray + i) == 'A' || *(charArray + i) == 'a') {
+            count ++;
+        }
+        i++;
+    }
+    return count;
+}
 
 void doubleValue(int *value) {
     *value *=2;
