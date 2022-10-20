@@ -42,5 +42,5 @@ int main() {
             printf ("Child Complete\n");
             continue; 	       }
     }
-    while (strcmp(&command, "quit") != 0);
+    while (strcmp(command, "quit") != 0);
 }
