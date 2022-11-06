@@ -8,7 +8,6 @@ int main() {
     printf("Before calling function: a = %d, b = %d\n", a, b);
     fun(&a, &b);
     printf("After calling function: a = %d, b = %d\n", a, b );
-
 }
 
 // call by reference example
