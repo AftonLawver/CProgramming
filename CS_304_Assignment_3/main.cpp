@@ -15,9 +15,10 @@ int main() {
     char ** guess_grid = generate_grid(grid_size);
     char ** result_grid = generate_grid(grid_size);
     populate_result_grid(result_grid, grid_size);
-
-    cout << "Result grid:" << endl;
-    print_grid(result_grid, grid_size);
+    cout << "Welcome to Battleship!" << endl;
+    cout << "----------------------" << endl;
+    cout << "Guess grid:" << endl;
+    print_grid(guess_grid, grid_size);
 
     while (guess_count > 0) {
 
@@ -28,6 +29,9 @@ int main() {
             cin.clear();
             cin.ignore(100, '\n');
             guess_count--;
+            if(guess_count == 0) {
+                goto done;
+            }
         }
         cout << "Enter a y-coordinate:";
         while ((!(cin >> y_coordinate)) || y_coordinate < 0 || y_coordinate > grid_size-1) {
@@ -35,41 +39,50 @@ int main() {
             cin.clear();
             cin.ignore(100, '\n');
             guess_count--;
+            if(guess_count == 0) {
+                goto done;
+            }
         }
         guess_count--;
 
         if (result_grid[y_coordinate][x_coordinate] == 'O') {
             guess_grid[y_coordinate][x_coordinate] = 'O';
             result_grid[y_coordinate][x_coordinate] = 'X';
+            cout << endl;
+            cout << "Kaboom!!" << endl;
             cout << "Current status of the guess grid thus far:" << endl;
             print_grid(guess_grid,grid_size);
-            cout << "Kaboom!!" << endl;
+
             cout << endl;
             sleep(1);
             continue;
         }
         guess_grid[y_coordinate][x_coordinate] = 'X';
         result_grid[y_coordinate][x_coordinate] = 'X';
+        cout << endl;
+        cout << "Sploosh!" << endl;
+        cout << "Current status of the guess grid thus far:" << endl;
         print_grid(guess_grid, grid_size);
-        cout << "Sploosh." << endl;
         cout << endl;
         sleep(1);
     }
+    done:
 
     for (int j = 0; j < grid_size; j++) {
         for (int k = 0; k < grid_size; k++) {
             if (result_grid[j][k] == 'O') {
+                cout << endl;
                 cout << "You did not hit all of the ships." << endl;
-                print_grid(result_grid, grid_size);
                 goto out;
             }
         }
     }
-    out:
+    cout << endl;
     cout << "Congratulations!" << endl;
     cout << "You hit all of the ships!" << endl;
     print_grid(result_grid, grid_size);
-
+    out:
+    print_grid(result_grid, grid_size);
     return 0;
 }
 
