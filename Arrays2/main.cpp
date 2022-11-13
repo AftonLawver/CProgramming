@@ -15,6 +15,7 @@ int main() {
         cout << myArray[i] << endl;
     }
 
+    // Selection sort
     for (int i=0; i<sizeof(myArray)/sizeof(int); i++) {
         for (int j=i+1; j<sizeof(myArray)/sizeof(int); j++) {
             if (myArray[j] < myArray[i]) {
