@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <unistd.h>
+
 using namespace std;
 
 class word {
@@ -106,14 +108,15 @@ public:
 };
 
 int main(int argc, char *argv[]) {
-    string file_name;
-    int location=0;
-    cout << "Enter the name of the file:"<< endl;
-    cin >> file_name;
-    while(argc != 2) {
-        cout << "Please enter the name of the input file:" << endl;
-        cin >> file_name;
+    if(argc != 2) {
+        cout << "Enter one command line argument as the filename. Please try the program again." << endl;
+        sleep(2);
+        exit(0);
     }
+    cout << "Number of args: " << argc << endl;
+    string file_name = argv[1];
+    int location=0;
+
 
     word_list my_word_list;
     fstream file_stream;
@@ -127,7 +130,6 @@ int main(int argc, char *argv[]) {
             my_word_list.add_word(new_word);
             int x = file_stream.get(); // consumes the whitespace or newline
             if (x == -1) {
-                cout << "End of file." << endl;
                 break;
             }
             current_word = "";
@@ -135,7 +137,6 @@ int main(int argc, char *argv[]) {
         }
         char current_char = file_stream.get();
         if (current_char == -1) {
-            cout << "End of file." << endl;
             break;
         }
         current_word += current_char;
