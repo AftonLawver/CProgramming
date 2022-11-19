@@ -1,8 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-
-
 using namespace std;
 
 class word {
@@ -52,11 +50,10 @@ private:
     int number_of_words = 0;
     vector<word> word_vector;
 public:
-
     void add_word(word my_word) {
-        for(word current_word : word_vector) {
-            if (current_word.get_value() == my_word.get_value()) {
-                current_word.increment_count();
+        for(int i=0; i < word_vector.size(); i++) {
+            if (word_vector[i].get_value() == my_word.get_value()) {
+                word_vector[i].increment_count();
                 return;
             }
         }
@@ -94,23 +91,29 @@ public:
 
     void sort_by_first_location() {
         // sort by using bubble sort
+        for (int i = 0; i<word_vector.size(); i++) {
+            for(int j = 0; j<word_vector.size()-i-1; j++) {
+                if(word_vector.at(j).get_location_of_first_occurrence()>word_vector.at(j+1).get_location_of_first_occurrence()){
+                    word temp_word = word_vector.at(j);
+                    word_vector.at(j) = word_vector.at(j+1);
+                    word_vector.at(j+1) = temp_word;
+                }
+            }
+        }
 
     }
 
 };
 
-//int argc, char *argv[]
-int main() {
-
-
+int main(int argc, char *argv[]) {
     string file_name;
     int location=0;
     cout << "Enter the name of the file:"<< endl;
     cin >> file_name;
-//    while(argc != 2) {
-//        cout << "Please enter the name of the input file:" << endl;
-//        cin >> file_name;
-//    }
+    while(argc != 2) {
+        cout << "Please enter the name of the input file:" << endl;
+        cin >> file_name;
+    }
 
     word_list my_word_list;
     fstream file_stream;
@@ -139,10 +142,20 @@ int main() {
     }
 
     my_word_list.sort_by_count();
-    cout << "Word" << "  " << "Count" << endl;
+    cout << "Words sorted by number of occurrences" << endl;
+    cout << "-------------------------------------" << endl;
     for(int i = 0; i<my_word_list.get_number_of_words(); i++) {
         word the_word = my_word_list.get_word_at_index(i);
         cout << the_word.get_value() << ": " << the_word.get_count() << endl;
+    }
+
+    cout << endl;
+    my_word_list.sort_by_first_location();
+    cout << "Words sorted by first location" << endl;
+    cout << "-------------------------------------" << endl;
+    for(int i = 0; i<my_word_list.get_number_of_words(); i++) {
+        word the_word = my_word_list.get_word_at_index(i);
+        cout << the_word.get_value() << ": " << the_word.get_location_of_first_occurrence() << endl;
     }
     return 0;
 }
