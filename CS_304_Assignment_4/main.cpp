@@ -92,7 +92,7 @@ public:
     }
 
     void sort_by_first_location() {
-        // sort by using bubble sort
+        // Sort by using bubble sort
         for (int i = 0; i<word_vector.size(); i++) {
             for(int j = 0; j<word_vector.size()-i-1; j++) {
                 if(word_vector.at(j).get_location_of_first_occurrence()>word_vector.at(j+1).get_location_of_first_occurrence()){
@@ -113,10 +113,8 @@ int main(int argc, char *argv[]) {
         sleep(2);
         exit(0);
     }
-    cout << "Number of args: " << argc << endl;
     string file_name = argv[1];
     int location=0;
-
 
     word_list my_word_list;
     fstream file_stream;
@@ -124,7 +122,10 @@ int main(int argc, char *argv[]) {
     string current_word;
 
     while(true) {
-        if (file_stream.peek() == 32 || file_stream.peek() == 10 || file_stream.peek() == -1) {
+        if (file_stream.peek() == -1) {
+            break;
+        }
+        if (file_stream.peek() == 32 || file_stream.peek() == 10) {
             word new_word = word(current_word,location);
             location ++; // location will only change for every word.
             my_word_list.add_word(new_word);
