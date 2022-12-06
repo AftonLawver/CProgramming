@@ -99,16 +99,19 @@ public:
     }
 
 };
-
-int main(int argc, char *argv[]) {
-    if(argc == 1) {
-        cout << "Enter at least one command line argument as the filename. Please try the program again." << endl;
-        sleep(2);
-        exit(0);
-    }
-    cout << "Number of args: " << argc << endl;
-    for (int i=1; i<argc; i++) {
-        string file_name = argv[i];
+//int argc, char *argv[]
+int main() {
+    string file_name;
+//    if(argc == 1) {
+//        cout << "Enter at least one command line argument as the filename. Please try the program again." << endl;
+//        sleep(2);
+//        exit(0);
+//    }
+//    cout << "Number of args: " << argc << endl;
+    cout << "Enter filename:" << endl;
+//    for (int i=1; i<argc; i++) {
+//        string file_name = argv[i];
+    cin >> file_name;
         word_list my_word_list;
         fstream file_stream;
         file_stream.open(file_name,ios::in);
@@ -116,6 +119,9 @@ int main(int argc, char *argv[]) {
 
         while(true) {
             if (file_stream.peek() == 32 || file_stream.peek() == 10 || file_stream.peek() == -1) {
+                if(file_stream.peek() == -1) {
+                    break;
+                }
                 word new_word = word(current_word);
                 my_word_list.add_word(new_word);
                 int x = file_stream.get(); // consumes the whitespace or newline
@@ -131,26 +137,8 @@ int main(int argc, char *argv[]) {
             }
             current_word += current_char;
         }
-
-        my_word_list.sort_by_count();
-        cout << "Words sorted by number of occurrences" << endl;
-        cout << "-------------------------------------" << endl;
-        for(int i=0; i<my_word_list.get_number_of_words(); i++) {
-            word the_word = my_word_list.get_word_at_index(i);
-            cout << the_word.get_value() << ": " << the_word.get_count() << endl;
-        }
-
-        cout << endl;
-        my_word_list.sort_by_first_location();
-        cout << "Words sorted by first location" << endl;
-        cout << "-------------------------------------" << endl;
-        for(int i = 0; i<my_word_list.get_number_of_words(); i++) {
-            word the_word = my_word_list.get_word_at_index(i);
-            cout << the_word.get_value() << ": " << the_word.get_location_of_first_occurrence() << endl;
-        }
-    }
-
-
+        cout << "Number of words: " << my_word_list.get_number_of_words() << endl;
+//    }
     return 0;
 }
 
