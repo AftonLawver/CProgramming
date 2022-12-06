@@ -12,10 +12,9 @@ private:
     int location_first_occurrence;
 
 public:
-    word(string value, int location_first_occurrence) {
+    word(string value) {
         this->value = value;
         this->count = 1;
-        this->location_first_occurrence = location_first_occurrence;
     }
 
     string get_value() {
@@ -53,12 +52,6 @@ private:
     vector<word> word_vector;
 public:
     void add_word(word my_word) {
-        for(int i=0; i < word_vector.size(); i++) {
-            if (word_vector[i].get_value() == my_word.get_value()) {
-                word_vector[i].increment_count();
-                return;
-            }
-        }
         word_vector.push_back(my_word);
         number_of_words++;
     }
@@ -114,50 +107,50 @@ int main(int argc, char *argv[]) {
         exit(0);
     }
     cout << "Number of args: " << argc << endl;
-    string file_name = argv[1];
-    int location=0;
+    for (int i=1; i<argc; i++) {
+        string file_name = argv[i];
+        word_list my_word_list;
+        fstream file_stream;
+        file_stream.open(file_name,ios::in);
+        string current_word;
 
-
-    word_list my_word_list;
-    fstream file_stream;
-    file_stream.open(file_name,ios::in);
-    string current_word;
-
-    while(true) {
-        if (file_stream.peek() == 32 || file_stream.peek() == 10 || file_stream.peek() == -1) {
-            word new_word = word(current_word,location);
-            location ++; // location will only change for every word.
-            my_word_list.add_word(new_word);
-            int x = file_stream.get(); // consumes the whitespace or newline
-            if (x == -1) {
+        while(true) {
+            if (file_stream.peek() == 32 || file_stream.peek() == 10 || file_stream.peek() == -1) {
+                word new_word = word(current_word);
+                my_word_list.add_word(new_word);
+                int x = file_stream.get(); // consumes the whitespace or newline
+                if (x == -1) {
+                    break;
+                }
+                current_word = "";
+                continue;
+            }
+            char current_char = file_stream.get();
+            if (current_char == -1) {
                 break;
             }
-            current_word = "";
-            continue;
+            current_word += current_char;
         }
-        char current_char = file_stream.get();
-        if (current_char == -1) {
-            break;
+
+        my_word_list.sort_by_count();
+        cout << "Words sorted by number of occurrences" << endl;
+        cout << "-------------------------------------" << endl;
+        for(int i=0; i<my_word_list.get_number_of_words(); i++) {
+            word the_word = my_word_list.get_word_at_index(i);
+            cout << the_word.get_value() << ": " << the_word.get_count() << endl;
         }
-        current_word += current_char;
+
+        cout << endl;
+        my_word_list.sort_by_first_location();
+        cout << "Words sorted by first location" << endl;
+        cout << "-------------------------------------" << endl;
+        for(int i = 0; i<my_word_list.get_number_of_words(); i++) {
+            word the_word = my_word_list.get_word_at_index(i);
+            cout << the_word.get_value() << ": " << the_word.get_location_of_first_occurrence() << endl;
+        }
     }
 
-    my_word_list.sort_by_count();
-    cout << "Words sorted by number of occurrences" << endl;
-    cout << "-------------------------------------" << endl;
-    for(int i = 0; i<my_word_list.get_number_of_words(); i++) {
-        word the_word = my_word_list.get_word_at_index(i);
-        cout << the_word.get_value() << ": " << the_word.get_count() << endl;
-    }
 
-    cout << endl;
-    my_word_list.sort_by_first_location();
-    cout << "Words sorted by first location" << endl;
-    cout << "-------------------------------------" << endl;
-    for(int i = 0; i<my_word_list.get_number_of_words(); i++) {
-        word the_word = my_word_list.get_word_at_index(i);
-        cout << the_word.get_value() << ": " << the_word.get_location_of_first_occurrence() << endl;
-    }
     return 0;
 }
 
