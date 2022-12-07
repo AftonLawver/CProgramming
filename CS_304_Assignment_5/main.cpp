@@ -9,8 +9,6 @@ class word {
 private:
     string value;
     int count;
-    int location_first_occurrence;
-
 public:
     word(string value) {
         this->value = value;
@@ -35,14 +33,6 @@ public:
 
     void increment_count() {
         count++;
-    }
-
-    int get_location_of_first_occurrence() {
-        return location_first_occurrence;
-    }
-
-    void set_location_of_first_occurrence(int location) {
-        location_first_occurrence = location;
     }
 };
 
@@ -70,37 +60,11 @@ public:
     int get_number_of_words() {
         return number_of_words;
     }
-
-    void sort_by_count() {
-        // Sort by using bubble sort
-        for (int i = 0; i<word_vector.size(); i++) {
-            for(int j = 0; j<word_vector.size()-i-1; j++) {
-                if(word_vector.at(j).get_count()>word_vector.at(j+1).get_count()){
-                    word temp_word = word_vector.at(j);
-                    word_vector.at(j) = word_vector.at(j+1);
-                    word_vector.at(j+1) = temp_word;
-                }
-            }
-        }
-    }
-
-    void sort_by_first_location() {
-        // sort by using bubble sort
-        for (int i = 0; i<word_vector.size(); i++) {
-            for(int j = 0; j<word_vector.size()-i-1; j++) {
-                if(word_vector.at(j).get_location_of_first_occurrence()>word_vector.at(j+1).get_location_of_first_occurrence()){
-                    word temp_word = word_vector.at(j);
-                    word_vector.at(j) = word_vector.at(j+1);
-                    word_vector.at(j+1) = temp_word;
-                }
-            }
-        }
-
-    }
-
 };
 //int argc, char *argv[]
 int main() {
+    int number_of_characters = 0;
+    int number_of_lines = 0;
     string file_name;
 //    if(argc == 1) {
 //        cout << "Enter at least one command line argument as the filename. Please try the program again." << endl;
@@ -111,6 +75,8 @@ int main() {
     cout << "Enter filename:" << endl;
 //    for (int i=1; i<argc; i++) {
 //        string file_name = argv[i];
+// cout << "File path: " << file_name << endl;
+// cout << "-------------------------------" << endl
     cin >> file_name;
         word_list my_word_list;
         fstream file_stream;
@@ -122,22 +88,53 @@ int main() {
                 if(file_stream.peek() == -1) {
                     break;
                 }
-                word new_word = word(current_word);
-                my_word_list.add_word(new_word);
-                int x = file_stream.get(); // consumes the whitespace or newline
-                if (x == -1) {
-                    break;
+
+                else if (file_stream.peek() == 10) {
+                    if (current_word == "") {
+                        int x = file_stream.get(); // consumes the whitespace or newline
+                        number_of_lines++;
+                        number_of_characters++;
+                        continue;
+                    }
+                    word new_word = word(current_word);
+                    my_word_list.add_word(new_word);
+                    int x = file_stream.get(); // consumes the whitespace or newline
+                    current_word = ""; // sets the current word back to empty string
+                    number_of_lines++;
+                    number_of_characters++;
+                    continue;
                 }
-                current_word = "";
-                continue;
+
+                else if (file_stream.peek() == 32) {
+                    if (current_word == "") {
+                        int x = file_stream.get(); // consumes the whitespace or newline
+                        number_of_characters++;
+                        continue;
+                    }
+                    word new_word = word(current_word);
+                    my_word_list.add_word(new_word);
+                    int x = file_stream.get(); // consumes the whitespace or newline
+                    current_word = ""; // sets the current word back to empty string
+                    number_of_characters++;
+                    continue;
+                }
+
+//                word new_word = word(current_word);
+//                my_word_list.add_word(new_word);
+//                int x = file_stream.get(); // consumes the whitespace or newline
+//
+//                current_word = ""; // sets the current word back to empty string
+//                continue;
             }
             char current_char = file_stream.get();
-            if (current_char == -1) {
-                break;
-            }
+            number_of_characters++;
             current_word += current_char;
         }
         cout << "Number of words: " << my_word_list.get_number_of_words() << endl;
+        cout << "Number of characters: " << number_of_characters << endl;
+        cout << "Number of lines: " << number_of_lines << endl;
+
+
 //    }
     return 0;
 }
