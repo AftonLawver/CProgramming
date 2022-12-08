@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <unistd.h>
+#include <map>
 
 using namespace std;
 
@@ -60,11 +61,24 @@ public:
     int get_number_of_words() {
         return number_of_words;
     }
-};
+
+    void print_number_of_words_for_each_letter() {
+        map<char, int> m;
+        for (word i: word_vector) {
+            char first_character = toupper(i.get_value().at(0));
+            m[first_character] +=1;
+        }
+        for (auto const& [key, val] : m)
+        {
+                cout << key<< ':' << val << endl;
+        }
+        }
+    };
+
 //int argc, char *argv[]
 int main() {
-    int number_of_characters = 0;
-    int number_of_lines = 0;
+    unsigned int number_of_characters = 0;
+    unsigned int number_of_lines = 1;
     string file_name;
 //    if(argc == 1) {
 //        cout << "Enter at least one command line argument as the filename. Please try the program again." << endl;
@@ -83,9 +97,15 @@ int main() {
         file_stream.open(file_name,ios::in);
         string current_word;
 
+//C:\CProgramming\test.txt
         while(true) {
             if (file_stream.peek() == 32 || file_stream.peek() == 10 || file_stream.peek() == -1) {
                 if(file_stream.peek() == -1) {
+                    if (current_word == "") {
+                        break;
+                    }
+                    word new_word = word(current_word);
+                    my_word_list.add_word(new_word);
                     break;
                 }
 
@@ -130,11 +150,16 @@ int main() {
             number_of_characters++;
             current_word += current_char;
         }
+        if (number_of_characters == 0) {
+            number_of_lines = 0;
+        }
         cout << "Number of words: " << my_word_list.get_number_of_words() << endl;
         cout << "Number of characters: " << number_of_characters << endl;
         cout << "Number of lines: " << number_of_lines << endl;
 
-
+        cout << "Number of words beginning with each letter: " << endl;
+        cout << "------------------------------------------" << endl;
+        my_word_list.print_number_of_words_for_each_letter();
 //    }
     return 0;
 }
