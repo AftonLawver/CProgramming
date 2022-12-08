@@ -81,7 +81,7 @@ int main() {
     unsigned int number_of_lines = 1;
     string file_name;
 //    if(argc == 1) {
-//        cout << "Enter at least one command line argument as the filename. Please try the program again." << endl;
+//        cout << "Enter at least one file as the command line argument. Please try the program again." << endl;
 //        sleep(2);
 //        exit(0);
 //    }
@@ -111,14 +111,14 @@ int main() {
 
                 else if (file_stream.peek() == 10) {
                     if (current_word == "") {
-                        int x = file_stream.get(); // consumes the whitespace or newline
+                        int x = file_stream.get(); // consumes the newline character
                         number_of_lines++;
                         number_of_characters++;
                         continue;
                     }
                     word new_word = word(current_word);
                     my_word_list.add_word(new_word);
-                    int x = file_stream.get(); // consumes the whitespace or newline
+                    int x = file_stream.get(); // consumes the newline
                     current_word = ""; // sets the current word back to empty string
                     number_of_lines++;
                     number_of_characters++;
@@ -127,24 +127,17 @@ int main() {
 
                 else if (file_stream.peek() == 32) {
                     if (current_word == "") {
-                        int x = file_stream.get(); // consumes the whitespace or newline
+                        int x = file_stream.get(); // consumes the whitespace
                         number_of_characters++;
                         continue;
                     }
                     word new_word = word(current_word);
                     my_word_list.add_word(new_word);
-                    int x = file_stream.get(); // consumes the whitespace or newline
+                    int x = file_stream.get(); // consumes the whitespace
                     current_word = ""; // sets the current word back to empty string
                     number_of_characters++;
                     continue;
                 }
-
-//                word new_word = word(current_word);
-//                my_word_list.add_word(new_word);
-//                int x = file_stream.get(); // consumes the whitespace or newline
-//
-//                current_word = ""; // sets the current word back to empty string
-//                continue;
             }
             char current_char = file_stream.get();
             number_of_characters++;
@@ -153,6 +146,7 @@ int main() {
         if (number_of_characters == 0) {
             number_of_lines = 0;
         }
+        cout << "Name of file: " << file_name << endl;
         cout << "Number of words: " << my_word_list.get_number_of_words() << endl;
         cout << "Number of characters: " << number_of_characters << endl;
         cout << "Number of lines: " << number_of_lines << endl;
