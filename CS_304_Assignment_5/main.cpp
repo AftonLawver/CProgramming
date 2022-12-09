@@ -92,37 +92,55 @@ int main() {
 // cout << "File path: " << file_name << endl;
 // cout << "-------------------------------" << endl
     cin >> file_name;
-        word_list my_word_list;
-        fstream file_stream;
-        file_stream.open(file_name,ios::in);
-        string current_word;
+    word_list my_word_list;
+    fstream file_stream;
+    file_stream.open(file_name, ios::in);
+    if(file_stream.fail()){
+        cout << "File does not exist. Please try again." << endl;
+        sleep(2);
+        exit(0);
+    }
+    string current_word;
+    char *line = new char[1];
 
-//C:\CProgramming\test.txt
-        while(true) {
+//C:\Users\lawve\Desktop\test.txt
+    while (true) {
             if (file_stream.peek() == 32 || file_stream.peek() == 10 || file_stream.peek() == -1) {
                 if(file_stream.peek() == -1) {
                     if (current_word == "") {
+                        delete[] line;
                         break;
                     }
-                    word new_word = word(current_word);
-                    my_word_list.add_word(new_word);
-                    break;
+                    else{
+                        word new_word = word(current_word);
+                        my_word_list.add_word(new_word);
+                        delete[] line;
+                        break;
+                    }
+
                 }
 
+                // newline
                 else if (file_stream.peek() == 10) {
                     if (current_word == "") {
                         int x = file_stream.get(); // consumes the newline character
                         number_of_lines++;
                         number_of_characters++;
+                        delete[] line;
+                        line = new char[1];
                         continue;
                     }
-                    word new_word = word(current_word);
-                    my_word_list.add_word(new_word);
-                    int x = file_stream.get(); // consumes the newline
-                    current_word = ""; // sets the current word back to empty string
-                    number_of_lines++;
-                    number_of_characters++;
-                    continue;
+                    else {
+                        word new_word = word(current_word);
+                        my_word_list.add_word(new_word);
+                        int x = file_stream.get(); // consumes the newline
+                        current_word = ""; // sets the current word back to empty string
+                        number_of_lines++;
+                        number_of_characters++;
+                        delete[] line;
+                        line = new char[1];
+                        continue;
+                    }
                 }
 
                 else if (file_stream.peek() == 32) {
@@ -131,12 +149,14 @@ int main() {
                         number_of_characters++;
                         continue;
                     }
-                    word new_word = word(current_word);
-                    my_word_list.add_word(new_word);
-                    int x = file_stream.get(); // consumes the whitespace
-                    current_word = ""; // sets the current word back to empty string
-                    number_of_characters++;
-                    continue;
+                    else {
+                        word new_word = word(current_word);
+                        my_word_list.add_word(new_word);
+                        int x = file_stream.get(); // consumes the whitespace
+                        current_word = ""; // sets the current word back to empty string
+                        number_of_characters++;
+                        continue;
+                    }
                 }
             }
             char current_char = file_stream.get();
@@ -155,24 +175,53 @@ int main() {
         cout << "------------------------------------------" << endl;
         my_word_list.print_number_of_words_for_each_letter();
 //    }
-    return 0;
-}
+        return 0;
+    }
 
+//        int peek_value = file_stream.peek();
+//        switch (peek_value) {
+//            case 32: {
+//                if (current_word == "") {
+//                    int x = file_stream.get(); // consumes the whitespace
+//                    number_of_characters++;
+//                    continue;
+//                }
+//                word new_word = word(current_word);
+//                my_word_list.add_word(new_word);
+//                int x = file_stream.get(); // consumes the whitespace
+//                current_word = ""; // sets the current word back to empty string
+//                number_of_characters++;
+//                continue;
+//            }
+//            case 10: {
+//                if (current_word == "") {
+//                    int x = file_stream.get(); // consumes the newline character
+//                    number_of_lines++;
+//                    number_of_characters++;
+//                    continue;
+//                }
+//                word new_word = word(current_word);
+//                my_word_list.add_word(new_word);
+//                int x = file_stream.get(); // consumes the newline
+//                current_word = ""; // sets the current word back to empty string
+//                number_of_lines++;
+//                number_of_characters++;
+//                continue;
+//            }
+//            case -1: {
+//                if (current_word == "") {
+//                    processing_done = true;
+//                    break;
+//                }
+//                word new_word = word(current_word);
+//                my_word_list.add_word(new_word);
+//                processing_done = true;
+//                break;
+//            }
+//            default:
+//                char current_char = file_stream.get();
+//                number_of_characters++;
+//                current_word += current_char;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//        }
 
