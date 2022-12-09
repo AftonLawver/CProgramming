@@ -80,6 +80,9 @@ int main() {
     unsigned int number_of_characters = 0;
     unsigned int number_of_lines = 1;
     string file_name;
+    int buffer_size = 10;
+    char ** buffer = (char **) malloc(buffer_size * sizeof(char *));
+
 //    if(argc == 1) {
 //        cout << "Enter at least one file as the command line argument. Please try the program again." << endl;
 //        sleep(2);
@@ -166,6 +169,9 @@ int main() {
         if (number_of_characters == 0) {
             number_of_lines = 0;
         }
+        // Need to add all of this information into dynamic memory to be printed out at the end.
+        buffer[0] = (char*)malloc()
+
         cout << "Name of file: " << file_name << endl;
         cout << "Number of words: " << my_word_list.get_number_of_words() << endl;
         cout << "Number of characters: " << number_of_characters << endl;
@@ -174,7 +180,7 @@ int main() {
         cout << "Number of words beginning with each letter: " << endl;
         cout << "------------------------------------------" << endl;
         my_word_list.print_number_of_words_for_each_letter();
-//    }
+
         return 0;
     }
 
