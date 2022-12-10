@@ -80,28 +80,18 @@ public:
     }
 };
 
-//int argc, char *argv[]
 int main(int argc, char *argv[]) {
-    unsigned int number_of_characters = 0;
-    unsigned int number_of_lines = 1;
-    string file_name;
-    // have a variable called number of files that grabs argc-1 and sets buffer size = that
-    char **buffer;
     int number_of_files = argc - 1;
     int buffer_size = number_of_files;
-    buffer = (char **)malloc(buffer_size * sizeof(char *));
-    if (buffer == NULL) {
-        cout << "Error in allocating memory!!" << endl;
-        return -1;
-    }
-
+    string *dynamic_string_array = new string[buffer_size];
     if (argc == 1) {
         cout << "Enter at least one file as the command line argument. Please try the program again." << endl;
         sleep(2);
         exit(0);
     }
-//    cout << "Enter filename:" << endl;
     for (int i = 1; i < argc; i++) {
+        unsigned int number_of_characters = 0;
+        unsigned int number_of_lines = 1;
         string file_name = argv[i];
 //    cin >> file_name;
         word_list my_word_list;
@@ -162,17 +152,6 @@ int main(int argc, char *argv[]) {
         if (number_of_characters == 0) {
             number_of_lines = 0;
         }
-//        cout << "Name of file: " << file_name << endl;
-//        cout << "Number of words: " << my_word_list.get_number_of_words() << endl;
-//        cout << "Number of characters: " << number_of_characters << endl;
-//        cout << "Number of lines: " << number_of_lines << endl;
-//
-//        cout << "Number of words beginning with each letter: " << endl;
-//        cout << "------------------------------------------" << endl;
-//        string result = my_word_list.get_number_of_words_for_each_letter();
-//        cout << result << endl;
-        // Need to add all of this information into dynamic memory to be printed out at the end.
-
         string long_string = "Name of file: " + file_name + "\n"
                              + "Number of words: " + to_string(my_word_list.get_number_of_words()) + "\n"
                              + "Number of characters: " + to_string(number_of_characters) + "\n"
@@ -181,24 +160,16 @@ int main(int argc, char *argv[]) {
                              + "------------------------------------------\n"
                              + my_word_list.get_number_of_words_for_each_letter() + "\n";
 
-        char *c_string = (char *) (long_string.c_str());
-
         // allocate space within buffer and add data to the buffer
-        buffer[i - 1] = (char *) malloc(long_string.length() * sizeof(char));
-        buffer[i - 1] = c_string;
+        dynamic_string_array[i - 1] = long_string;
     }
-
     // print all file information from buffer
     for (int j = 0; j < buffer_size; j++) {
-        cout << buffer[j];
+        cout << dynamic_string_array[j];
         cout << endl;
     }
-
     // free dynamically allocated memory
-    free(buffer);
-    cout << "All dynamic memory has been freed." << endl;
+    delete[] dynamic_string_array;
 
-//C:\CProgramming\test.txt
     return 0;
-
 }
