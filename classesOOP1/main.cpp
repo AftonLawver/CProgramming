@@ -32,11 +32,10 @@ public:
         age = ageOfPerson;
     }
 
-    void printPersonData() {
+    virtual void printPersonData() {
         cout << "Person name: " << getName() << endl;
         cout << "Person age: " << getAge() << endl;
     }
-
 };
 
 class Student : public Person {
@@ -56,10 +55,10 @@ public:
         level = levelOfPerson;
     }
 
-    void printStudentData() {
+    void printPersonData() {
         cout << "Student name: " << getName() << endl;
         cout << "Student age: " << getAge() << endl;
-        cout << "Student level: " << level << endl;
+        cout << "Student level: " << getLevel() << endl;
     }
 
 };
@@ -91,13 +90,12 @@ public:
         this->course = course;
     }
 
-    void printTeacherData() {
+    void printPersonData() {
         cout << "Teacher name: " << getName() << endl;
         cout << "Teacher age: " << getAge() << endl;
         cout << "Teacher salary: " << salary << endl;
         cout << "Teacher course: " << course << endl;
     }
-
 };
 
 class StaffMember : public Person {
@@ -117,7 +115,7 @@ public:
         this->title = title;
     }
 
-    void printStaffMemberData() {
+    void printPersonData() {
         cout << "Staff name: " << getName() << endl;
         cout << "Staff age: " << getAge() << endl;
         cout << "Staff title: " << title << endl;
@@ -149,11 +147,31 @@ int main() {
         cin >> typeOfPerson;
         if (typeOfPerson == "Student" || typeOfPerson == "student") {
             cout << "Enter the student's name:";
-            cin >> name;
-            cout << "Enter the student's age:";
-            cin >> age;
-            cout << "Enter the student's level:";
-            cin >> level;
+            cin.ignore();
+            getline(cin, name);
+            try {
+                cout << "Enter the student's age:";
+                cin >> age;
+                if (age < 18 || age > 60) {
+                    throw 99;
+                }
+            }catch (int x) {
+                cout << "Age must be between 18 and 60. ERROR NUMBER:" << x << endl;
+                return 1;
+            }
+
+
+            try {
+                cout << "Enter the student's level (undergraduate or graduate):";
+                cin >> level;
+                if (level != "undergraduate" || level != "Undergraduate" || level !=
+                "Graduate" || level != "graduate") {
+                    throw 100;
+                }
+            }catch (int x) {
+                cout << "Student's level must be either undergraduate or graduate. ERROR NUMBER:" << x << endl;
+                return 1;
+            }
             Student student(name, age, level);
 
             myPersonVector.push_back(student);
@@ -164,13 +182,15 @@ int main() {
         }
         else if (typeOfPerson == "Teacher" || typeOfPerson == "teacher") {
             cout << "Enter the teacher's name:";
-            cin >> name;
+            cin.ignore();
+            getline(cin,name);
             cout << "Enter the teacher's age:";
             cin >> age;
             cout << "Enter the teacher's salary:";
             cin >> salary;
             cout << "Enter the teacher's course:";
-            cin >> course;
+            cin.ignore();
+            getline(cin, course);
 
             Teacher teacher(name, age, salary, course);
 
@@ -183,11 +203,13 @@ int main() {
         }
         else if (typeOfPerson == "Staff" || typeOfPerson == "staff") {
             cout << "Enter the staff member's name:";
-            cin >> name;
+            cin.ignore();
+            getline(cin, name);
             cout << "Enter the staff member's age:";
             cin >> age;
-            cout << "Enter the staff member's age:";
-            cin >> title;
+            cout << "Enter the staff member's title:";
+            cin.ignore();
+            getline(cin, title);
 
             StaffMember staffMember(name, age, title);
             myPersonVector.push_back(staffMember);
