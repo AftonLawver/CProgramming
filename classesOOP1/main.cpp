@@ -139,12 +139,24 @@ int main() {
     string addAnotherPerson = "Yes";
 
 //     dynamically allocate buffer for 10 Person objects.
-    vector<Person> myPersonVector;
+    vector<Person*> myPersonVector;
+
 
     while (addAnotherPerson == "Yes" || addAnotherPerson == "yes" && count < 10) {
-        cout << "What type of Person would you like to add?" << endl;
-        cout << "(Enter Student, Teacher, or Staff):";
-        cin >> typeOfPerson;
+        try {
+            cout << "What type of Person would you like to add?" << endl;
+            cout << "(Enter Student, Teacher, or Staff):";
+            cin >> typeOfPerson;
+            if (typeOfPerson != "Teacher" && typeOfPerson != "teacher"
+            && typeOfPerson != "Student" && typeOfPerson != "student"
+            && typeOfPerson != "Staff" && typeOfPerson != "staff") {
+                throw 50;
+            }
+        }
+        catch (int x) {
+            cout << "Invalid type of person. Please try again. ERROR NUMBER:" << x << endl;
+            return 1;
+        }
         if (typeOfPerson == "Student" || typeOfPerson == "student") {
             cout << "Enter the student's name:";
             cin.ignore();
@@ -164,15 +176,15 @@ int main() {
             try {
                 cout << "Enter the student's level (undergraduate or graduate):";
                 cin >> level;
-                if (level != "undergraduate" || level != "Undergraduate" || level !=
-                "Graduate" || level != "graduate") {
+                if (level != "undergraduate" && level != "Undergraduate" && level !=
+                "Graduate" && level != "graduate") {
                     throw 100;
                 }
             }catch (int x) {
                 cout << "Student's level must be either undergraduate or graduate. ERROR NUMBER:" << x << endl;
                 return 1;
             }
-            Student student(name, age, level);
+            Student *student = new Student(name, age, level);
 
             myPersonVector.push_back(student);
             count++;
@@ -192,7 +204,7 @@ int main() {
             cin.ignore();
             getline(cin, course);
 
-            Teacher teacher(name, age, salary, course);
+            Teacher *teacher = new Teacher(name, age, salary, course);
 
             myPersonVector.push_back(teacher);
             count++;
@@ -211,10 +223,9 @@ int main() {
             cin.ignore();
             getline(cin, title);
 
-            StaffMember staffMember(name, age, title);
+            StaffMember *staffMember = new StaffMember(name, age, title);
             myPersonVector.push_back(staffMember);
             count++;
-
             cout << "Would you like to add another Person? (Enter Yes or No)" << endl;
             cin >> addAnotherPerson;
         }
@@ -226,7 +237,7 @@ int main() {
     for (int i = 0; i < count; i++) {
         cout << "Person #" << i+1 << endl;
         cout << "-------------" << endl;
-        myPersonVector.at(i).printPersonData();
+        myPersonVector[i]->printPersonData();
         cout << endl;
     }
     return 0;
