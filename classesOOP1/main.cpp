@@ -36,19 +36,28 @@ public:
         cout << "Person name: " << getName() << endl;
         cout << "Person age: " << getAge() << endl;
     }
+
+    virtual string getType() {
+    }
 };
 
 class Student : public Person {
 private:
     string level;
+    string type;
 
 public:
     Student(string name, int age, string level) : Person(name, age) {
         this->level = level;
+        this->type = "Student";
     }
 
     string getLevel() {
         return level;
+    }
+
+    string getType() {
+        return type;
     }
 
     void setLevel(string levelOfPerson) {
@@ -67,11 +76,13 @@ class Teacher : public Person {
 private:
     int salary;
     string course;
+    string type;
 
 public:
     Teacher(string name, int age, int salary, string course) : Person(name, age) {
         this->salary = salary;
         this->course = course;
+        this->type = "Teacher";
     }
 
     int getSalary() {
@@ -80,6 +91,10 @@ public:
 
     string getCourse() {
         return course;
+    }
+
+    string getType() {
+        return type;
     }
 
     void setSalary(int salary) {
@@ -101,14 +116,19 @@ public:
 class StaffMember : public Person {
 private:
     string title;
+    string type;
 
 public:
     StaffMember(string name, int age, string title) : Person(name, age) {
         this-> title = title;
+        this->type = "Staff Member";
     }
 
     string getTitle() {
         return title;
+    }
+    string getType() {
+        return type;
     }
 
     void setTitle(string title) {
@@ -122,10 +142,21 @@ public:
     }
 };
 
-
-
-
-
+string addAPerson(int count) {
+    string addAPerson = "";
+    do {
+        if (count >= 1) {
+            cout << "Would you like to add another person? (Type yes or no): " << endl;
+            cin >> addAPerson;
+        }
+        else {
+            cout << "Would you like to add a person? (Enter yes or no): " << endl;
+            cin >> addAPerson;
+        }
+    }
+    while (addAPerson != "No" && addAPerson != "no" && addAPerson != "Yes" && addAPerson != "yes");
+    return addAPerson;
+}
 
 int main() {
     string name;
@@ -136,13 +167,11 @@ int main() {
     string title;
     int count = 0;
     string typeOfPerson;
-    string addAnotherPerson = "Yes";
+    string addAnotherPerson = addAPerson(count);
 
-//     dynamically allocate buffer for 10 Person objects.
     vector<Person*> myPersonVector;
 
-
-    while (addAnotherPerson == "Yes" || addAnotherPerson == "yes" && count < 10) {
+    while (addAnotherPerson == "Yes" || addAnotherPerson == "yes") {
         try {
             cout << "What type of Person would you like to add?" << endl;
             cout << "(Enter Student, Teacher, or Staff):";
@@ -188,9 +217,7 @@ int main() {
 
             myPersonVector.push_back(student);
             count++;
-
-            cout << "Would you like to add another Person? (Enter Yes or No)" << endl;
-            cin >> addAnotherPerson;
+            addAnotherPerson = addAPerson(count);
         }
         else if (typeOfPerson == "Teacher" || typeOfPerson == "teacher") {
             cout << "Enter the teacher's name:";
@@ -208,10 +235,7 @@ int main() {
 
             myPersonVector.push_back(teacher);
             count++;
-
-            cout << "Would you like to add another Person? (Enter Yes or No)" << endl;
-            cin >> addAnotherPerson;
-            continue;
+            addAnotherPerson = addAPerson(count);
         }
         else if (typeOfPerson == "Staff" || typeOfPerson == "staff") {
             cout << "Enter the staff member's name:";
@@ -226,8 +250,7 @@ int main() {
             StaffMember *staffMember = new StaffMember(name, age, title);
             myPersonVector.push_back(staffMember);
             count++;
-            cout << "Would you like to add another Person? (Enter Yes or No)" << endl;
-            cin >> addAnotherPerson;
+            addAnotherPerson = addAPerson(count);
         }
         else {
             cout << "Type of person is invalid." << endl;
@@ -235,7 +258,7 @@ int main() {
         }
     }
     for (int i = 0; i < count; i++) {
-        cout << "Person #" << i+1 << endl;
+        cout << "Person #" << i+1 << ": " << myPersonVector[i]->getType() << endl;
         cout << "-------------" << endl;
         myPersonVector[i]->printPersonData();
         cout << endl;
