@@ -1,22 +1,40 @@
 #include <stdio.h>
 
 int main() {
-    char filename[100];
-    scanf("%s", filename);
-    FILE *fptr = fopen(filename, "r");
-    if (fptr == NULL) {
-        perror("Error opening the file");
-        return(-1);
-    }
+    FILE *file;
+    char path[100];
+
     int characters = 0;
     int words = 0;
     int lines = 0;
-    char line[102];
-    fgets(line, 102, filename);
+    char c;
+    printf("Enter source file path: ");
+    scanf("%s", path);
+    file = fopen(path, "r");
+    if (file == NULL) {
+        perror("Error opening the file");
+        return(-1);
+    }
+    else {
+        while ((c = fgetc(file)) != EOF) {
+            characters ++;
 
+            if (c == '\n' || c == '\0') {
+                lines++;
+            }
+            if (c == ' ' || c == '\t' || c == '\n' || c == '\0') {
+                words++;
+            }
+        }
+        if (characters > 0) {
+            words ++;
+            lines ++;
+        }
+    }
 
-    fgets
-
+    printf("The number of lines in the file: %d\n", lines);
+    printf("The number of words in the file: %d\n", words);
+    printf("The number of characters in the file: %d\n", characters);
 
     return 0;
 }
