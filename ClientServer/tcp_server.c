@@ -1,7 +1,8 @@
+// Afton Lawver
+// 851463587
+
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <sys/types.h>
 #include <sys/socket.h>
 #include <strings.h>
 #include <string.h>
@@ -9,7 +10,7 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
-#define MAX 500
+#define MAX 50
 #define PORT 12587
 
 void func(int connfd)
@@ -18,20 +19,42 @@ void func(int connfd)
     int n;
     // infinite loop for chat
     for (;;) {
+        FILE *pipe;
+        int len;
+        char c = 0;
+        // clear the contents the in buffer object
         bzero(buff, MAX);
-
-        // read the message from client and copy it in buffer
+        // read the message from client and copy it into the buffer
         read(connfd, buff, sizeof(buff));
         // print buffer which contains the client contents
-        printf("From client: %s\t To client : ", buff);
-        bzero(buff, MAX);
-        n = 0;
-        // copy server message in the buffer
-        while ((buff[n++] = getchar()) != '\n')
-            ;
+        printf("From client: %s", buff);
 
-        // and send that buffer to client
-        write(connfd, buff, sizeof(buff));
+//        if (system(buff) != 0) {
+//            write(connfd, "system command does not exist", sizeof(buff));
+//        }
+//
+//        else {
+////            write(connfd, "system command does exist!", sizeof(buff));
+//            write(connfd, buff, sizeof(buff));
+//            pipe = popen(buff, "r");
+//            bzero(buff, MAX);
+//            printf(buff);
+//            fgets(buff, MAX, pipe);
+//            len = strlen(buff);
+//            buff[len-1] = '\0';
+//            write(connfd, buff, sizeof(buff));
+//            pclose(pipe);
+//        }
+
+//
+//        else {
+//            printf("system command does exist.");
+//            fgets(buff, sizeof(buff), pipe);
+//            len = strlen(buff);
+//            buff[len-1] = '\0';
+//            write(connfd, buff, sizeof(buff));
+//            pclose(pipe);
+//        };
 
         // if msg contains "Exit" then server exit and chat ended.
         if (strncmp("exit", buff, 4) == 0) {

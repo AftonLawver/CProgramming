@@ -1,3 +1,6 @@
+// Afton Lawver
+// 851463587
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,7 +11,7 @@
 
 #include <netinet/in.h>
 #include <unistd.h>
-#define MAX 500
+#define MAX 50
 #define PORT 12587
 
 void func(int sockfd)
@@ -16,20 +19,22 @@ void func(int sockfd)
     char buff[MAX];
     int n;
     for (;;) {
+        // clear contents of buffer
         bzero(buff, sizeof(buff));
-        printf("Enter the command : ");
+        // tell user on client side to enter command.
+        printf("Enter the command: ");
         n = 0;
+        // store the command in the buff variable
         while ((buff[n++] = getchar()) != '\n')
             ;
-        int command_status = system(buff);
-        if (command_status != 0) {
-            write(sockfd, "System command does not exist", sizeof(buff));
-            continue;
-        }
+        // send the command (inside the buffer) to the server side through the socket.
         write(sockfd, buff, sizeof(buff));
+        // clear out the memory in buffer
         bzero(buff, sizeof(buff));
+        // read the output of the server into the buffer object
         read(sockfd, buff, sizeof(buff));
-        printf("From Server : %s", buff);
+        // print what is in the buffer to the terminal
+        printf("From Server: %s\n", buff);
         if ((strncmp(buff, "exit", 4)) == 0) {
             printf("Client Exit...\n");
             break;
@@ -63,7 +68,7 @@ int main(int argc, char *argv[]) {
         printf("connected to the server..\n");
 
     // receive data from the server
-   func(network_socket);
+    func(network_socket);
 
     // close the socket
     close(network_socket);
