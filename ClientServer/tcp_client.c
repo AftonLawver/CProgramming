@@ -11,7 +11,7 @@
 
 #include <netinet/in.h>
 #include <unistd.h>
-#define MAX 50
+#define MAX 500
 #define PORT 12587
 
 void func(int sockfd)
@@ -34,7 +34,7 @@ void func(int sockfd)
         // read the output of the server into the buffer object
         read(sockfd, buff, sizeof(buff));
         // print what is in the buffer to the terminal
-        printf("From Server: %s\n", buff);
+        printf("From Server: %s", buff);
         if ((strncmp(buff, "exit", 4)) == 0) {
             printf("Client Exit...\n");
             break;

@@ -10,7 +10,7 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
-#define MAX 50
+#define MAX 500
 #define PORT 12587
 
 void func(int connfd)
@@ -21,30 +21,37 @@ void func(int connfd)
     for (;;) {
         FILE *pipe;
         int len;
-        char c = 0;
         // clear the contents the in buffer object
-        bzero(buff, MAX);
+        bzero(buff, sizeof(buff));
         // read the message from client and copy it into the buffer
         read(connfd, buff, sizeof(buff));
         // print buffer which contains the client contents
         printf("From client: %s", buff);
 
-//        if (system(buff) != 0) {
-//            write(connfd, "system command does not exist", sizeof(buff));
-//        }
-//
-//        else {
-////            write(connfd, "system command does exist!", sizeof(buff));
+        if (system(buff) != 0) {
+            bzero(buff, sizeof(buff));
+            write(connfd, "system command does not exist", sizeof(buff));
+        }
+
+        else {
 //            write(connfd, buff, sizeof(buff));
-//            pipe = popen(buff, "r");
-//            bzero(buff, MAX);
-//            printf(buff);
-//            fgets(buff, MAX, pipe);
+
+            pipe = popen(buff, "r");
+            bzero(buff, sizeof(buff));
+            if (pipe == NULL) {
+                write(connfd, "Something went wrong with running the command.", sizeof(buff));
+            }
+            else {
+                fgets(buff, sizeof(buff), pipe);
+                write(connfd, buff, sizeof(buff));
+                pclose(pipe);
+            }
 //            len = strlen(buff);
 //            buff[len-1] = '\0';
+//            printf("%s", buff);
 //            write(connfd, buff, sizeof(buff));
-//            pclose(pipe);
-//        }
+
+        }
 
 //
 //        else {
