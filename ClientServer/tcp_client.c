@@ -47,12 +47,9 @@ int main(int argc, char *argv[]) {
     // create a socket
     int network_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (network_socket == -1) {
-        printf("socket creation failed...\n");
+        perror("socket creation failed...\n");
         exit(0);
     }
-    else
-        printf("Socket successfully created..\n");
-
     // specify an address for the socket
     struct sockaddr_in server_address;
     server_address.sin_family = AF_INET;
@@ -61,7 +58,7 @@ int main(int argc, char *argv[]) {
 
     if (connect(network_socket, (struct sockaddr *) &server_address, sizeof(server_address))
         != 0) {
-        printf("connection with the server failed...\n");
+        perror("connection with the server failed...\n");
         exit(0);
     }
     else

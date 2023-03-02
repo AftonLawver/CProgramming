@@ -10,7 +10,7 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
-#define MAX 500
+#define MAX 1024
 #define PORT 12587
 
 void func(int connfd)
@@ -34,40 +34,28 @@ void func(int connfd)
         }
 
         else {
-//            write(connfd, buff, sizeof(buff));
-
+            if (strncmp("exit", buff, 4) == 0) {
+                printf("Server Exit...\n");
+                break;
+            }
             pipe = popen(buff, "r");
             bzero(buff, sizeof(buff));
             if (pipe == NULL) {
                 write(connfd, "Something went wrong with running the command.", sizeof(buff));
             }
             else {
-                fgets(buff, sizeof(buff), pipe);
+                int i = 0;
+                int c = 0;
+                while((c=getc(pipe))!=EOF) {
+                    buff[i++]=c;
+                    buff[i]='\0';
+                }
                 write(connfd, buff, sizeof(buff));
                 pclose(pipe);
             }
-//            len = strlen(buff);
-//            buff[len-1] = '\0';
-//            printf("%s", buff);
-//            write(connfd, buff, sizeof(buff));
-
         }
-
-//
-//        else {
-//            printf("system command does exist.");
-//            fgets(buff, sizeof(buff), pipe);
-//            len = strlen(buff);
-//            buff[len-1] = '\0';
-//            write(connfd, buff, sizeof(buff));
-//            pclose(pipe);
-//        };
-
         // if msg contains "Exit" then server exit and chat ended.
-        if (strncmp("exit", buff, 4) == 0) {
-            printf("Server Exit...\n");
-            break;
-        }
+
     }
 }
 
@@ -77,7 +65,7 @@ int main() {
     // create the server socket
     int server_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (server_socket == -1) {
-        printf("socket creation failed...\n");
+        perror("socket creation failed...\n");
         exit(0);
     }
     else
@@ -92,7 +80,7 @@ int main() {
     // bind the socket to our specified IP and port #
     int bind_socket = bind(server_socket, (struct sockaddr *) &server_address, sizeof(server_address));
     if (bind_socket != 0) {
-        printf("socket bind failed...\n");
+        perror("socket bind failed...\n");
         exit(0);
     }
     else
@@ -101,7 +89,7 @@ int main() {
     // listen for connections, and make it be able to have 5 clients connected
     int server_listening = listen(server_socket, 5);
     if (server_listening != 0 ) {
-        printf("Server listening failed..\n");
+        perror("Server listening failed..\n");
         exit(0);
     }
     else
@@ -111,20 +99,14 @@ int main() {
     printf("Waiting for a connection on port %d\n", PORT);
     client_socket = accept(server_socket, NULL, NULL);
     if (client_socket < 0) {
-        printf("server accept failed..\n");
+        perror("server accept failed..\n");
         exit(0);
     }
     else
         printf("server accepted the client...\n");
-
     func(client_socket);
-
+    // close the socket
     close(server_socket);
 
-
-    // parameters: socket that we are accepting connections on
-
-
-    // close the socket
     return 0;
 }
