@@ -34,11 +34,11 @@ void func(int sockfd)
         // read the output of the server into the buffer object
         read(sockfd, buff, sizeof(buff));
         // print what is in the buffer to the terminal
-        printf("From Server: %s", buff);
-        if ((strncmp(buff, "exit", 4)) == 0) {
+        if ((strncmp(buff, "", 4)) == 0) {
             printf("Client Exit...\n");
             break;
         }
+        printf("From Server: %s", buff);
     }
 }
 

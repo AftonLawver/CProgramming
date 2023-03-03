@@ -36,7 +36,7 @@ void func(int connfd)
         else {
             if (strncmp("exit", buff, 4) == 0) {
                 printf("Server Exit...\n");
-                break;
+                return;
             }
             pipe = popen(buff, "r");
             bzero(buff, SIZE);
@@ -114,11 +114,13 @@ int main() {
             printf("Connection accepted from client\n");
             close(server_socket);
             func(new_socket);
+            break;
         }
         else {
             close(new_socket);
         }
     }
     close(new_socket);
+    exit(0);
     return 0;
 }
