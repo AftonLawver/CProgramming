@@ -9,6 +9,8 @@
 
 #include <netinet/in.h>
 #include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/types.h>
 
 #define SIZE 1024
 #define PORT 12587
@@ -22,14 +24,13 @@ void func(int connfd)
         FILE *pipe;
         int len;
         // clear the contents the in buffer object
-        bzero(buff, sizeof(buff));
+        bzero(buff, SIZE);
         // read the message from client and copy it into the buffer
         read(connfd, buff, sizeof(buff));
         // print buffer which contains the client contents
         printf("From client: %s", buff);
 
         if (system(buff) != 0) {
-            bzero(buff, sizeof(buff));
             write(connfd, "system command does not exist\n", sizeof(buff));
         }
         else {
@@ -38,7 +39,7 @@ void func(int connfd)
                 break;
             }
             pipe = popen(buff, "r");
-            bzero(buff, sizeof(buff));
+            bzero(buff, SIZE);
             if (pipe == NULL) {
                 write(connfd, "Something went wrong with running the command.", sizeof(buff));
             }
@@ -58,7 +59,10 @@ void func(int connfd)
 
 int main() {
     int pid;
+    int new_socket;
     struct sockaddr_in server_address;
+    struct sockaddr_in newAddr;
+    socklen_t addr_size;
     // create the server socket
     int server_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (server_socket == -1) {
@@ -81,7 +85,7 @@ int main() {
         exit(0);
     }
     else
-        printf("socket successfully binded..\n");
+        printf("socket successfully bound to port %d\n", PORT);
 
     // listen for connections, and make it be able to have 5 clients connected
     int server_listening = listen(server_socket, 5);
@@ -92,11 +96,11 @@ int main() {
     else
         printf("Server listening..\n");
 
-    int client_socket;
     printf("Waiting for a connection on port %d\n", PORT);
     while(1) {
-        client_socket = accept(server_socket, NULL, NULL);
-        if (client_socket < 0) {
+        new_socket = accept(server_socket, (struct sockaddr*)&newAddr, &addr_size);
+
+        if (new_socket < 0) {
             perror("Error on accept\n");
             exit(1);
         }
@@ -107,15 +111,14 @@ int main() {
             exit(1);
         }
         if (pid == 0) {
-            printf("server accepted the client...\n");
+            printf("Connection accepted from client\n");
             close(server_socket);
-            func(client_socket);
-            close(client_socket);
-            exit(0);
+            func(new_socket);
         }
         else {
-            close(client_socket);
+            close(new_socket);
         }
     }
+    close(new_socket);
     return 0;
 }
