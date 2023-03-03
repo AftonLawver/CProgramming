@@ -10,12 +10,12 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
-#define MAX 1024
+#define SIZE 1024
 #define PORT 12587
 
 void func(int connfd)
 {
-    char buff[MAX];
+    char buff[SIZE];
     int n;
     // infinite loop for chat
     for (;;) {
@@ -30,9 +30,8 @@ void func(int connfd)
 
         if (system(buff) != 0) {
             bzero(buff, sizeof(buff));
-            write(connfd, "system command does not exist", sizeof(buff));
+            write(connfd, "system command does not exist\n", sizeof(buff));
         }
-
         else {
             if (strncmp("exit", buff, 4) == 0) {
                 printf("Server Exit...\n");
@@ -54,13 +53,11 @@ void func(int connfd)
                 pclose(pipe);
             }
         }
-        // if msg contains "Exit" then server exit and chat ended.
-
     }
 }
 
 int main() {
-
+    int pid;
     struct sockaddr_in server_address;
     // create the server socket
     int server_socket = socket(AF_INET, SOCK_STREAM, 0);
@@ -97,16 +94,28 @@ int main() {
 
     int client_socket;
     printf("Waiting for a connection on port %d\n", PORT);
-    client_socket = accept(server_socket, NULL, NULL);
-    if (client_socket < 0) {
-        perror("server accept failed..\n");
-        exit(0);
+    while(1) {
+        client_socket = accept(server_socket, NULL, NULL);
+        if (client_socket < 0) {
+            perror("Error on accept\n");
+            exit(1);
+        }
+        // Create child process
+        pid = fork();
+        if (pid < 0) {
+            perror("Error on fork");
+            exit(1);
+        }
+        if (pid == 0) {
+            printf("server accepted the client...\n");
+            close(server_socket);
+            func(client_socket);
+            close(client_socket);
+            exit(0);
+        }
+        else {
+            close(client_socket);
+        }
     }
-    else
-        printf("server accepted the client...\n");
-    func(client_socket);
-    // close the socket
-    close(server_socket);
-
     return 0;
 }

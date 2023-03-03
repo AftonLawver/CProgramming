@@ -11,12 +11,12 @@
 
 #include <netinet/in.h>
 #include <unistd.h>
-#define MAX 500
+#define SIZE 1024
 #define PORT 12587
 
 void func(int sockfd)
 {
-    char buff[MAX];
+    char buff[SIZE];
     int n;
     for (;;) {
         // clear contents of buffer
@@ -43,6 +43,10 @@ void func(int sockfd)
 }
 
 int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        fprintf(stderr, "ERROR: no IP address provided\n");
+        exit(1);
+    }
     char *ip_address = argv[1];
     // create a socket
     int network_socket = socket(AF_INET, SOCK_STREAM, 0);
