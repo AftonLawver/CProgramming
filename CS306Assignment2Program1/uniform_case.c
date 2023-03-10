@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     int firstCharacter = argv[1][0];
 
     // allocate new array for new string in memory
-    char *ptr = malloc((strlen(argv[1])) * sizeof(char));
+    char *ptr = malloc((strlen(argv[1])+1) * sizeof(char));
     if (ptr == NULL) {
         perror("malloc() failed");
         exit(EXIT_FAILURE);
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
         printf("First letter is lowercase.\n");
         ptr = convertToLower(argv[1], ptr);
     }
-    printf("New String: %s", ptr);
+    printf("New String: %s\n", ptr);
     return 0;
 }
 
@@ -44,10 +44,15 @@ char *convertToUpper(char *inputString, char *outputString) {
     outputString[0] = inputString[0];
     int i = 1;
     while (inputString[i] != '\0') {
-        outputString[i] = inputString[i] - 32;
+        if (isUpper(inputString[i])) {
+            outputString[i] = inputString[i];
+        }
+        else {
+            outputString[i] = inputString[i] - 32;
+        }
         i++;
     }
-    outputString[strlen(outputString)-1] = '\0';
+    outputString[strlen(outputString)] = '\0';
     return outputString;
 }
 
@@ -55,9 +60,14 @@ char *convertToLower(char *inputString, char *outputString) {
     outputString[0] = inputString[0];
     int i = 1;
     while (inputString[i] != '\0') {
-        outputString[i] = inputString[i] + 32;
+        if (isUpper(inputString[i])) {
+            outputString[i] = inputString[i] + 32;
+        }
+        else {
+            outputString[i] = inputString[i];
+        }
         i++;
     }
-    outputString[strlen(outputString)-1] = '\0';
+    outputString[strlen(outputString)] = '\0';
     return outputString;
 }
