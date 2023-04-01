@@ -1,3 +1,6 @@
+// Afton Lawver
+// SIU851463587
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -22,24 +25,17 @@ int main(int argc, char *argv[]) {
                 break;
             }
             printf("%s", my_word);
+            free(my_word);
         }
-
-//        while (1) {
-            // call get_token until returns null
-            // if  return from get_token is null then break loop
-            // else write the current token to the stout (fd=1), and then free the token.
-
-
-
-        }
+    }
     return 0;
     }
 
 char *get_token(int fd) {
     int capacity = 50;
     // dynamically allocate a buffer of 50 bytes;
-    char *buffer = (char *)malloc(capacity * sizeof(char));
-    if (buffer == NULL) {
+    char *token_buffer = (char *)malloc(capacity * sizeof(char));
+    if (token_buffer == NULL) {
         perror("malloc failed");
         exit(1);
     }
@@ -48,29 +44,26 @@ char *get_token(int fd) {
         // resize the buffer if the capacity is reached.
         if (i == capacity) {
             capacity += 10;
-            buffer = (char *)realloc(buffer, capacity * sizeof(char));
+            token_buffer = (char *)realloc(token_buffer, capacity * sizeof(char));
         }
-        int read_return = read(fd, &buffer[i], 1);
+        int read_return = read(fd, &token_buffer[i], 1);
         if(read_return == -1) {
             perror("Error");
             return NULL;
         }
         // no more characters to read from file (EOF)
         else if (read_return == 0 && i > 0) {
-            buffer[i] = '\n';
-            return buffer;
+            token_buffer[i] = '\n';
+            return token_buffer;
         }
         else if (read_return == 0) {
             return NULL;
         }
-        else if (buffer[i] == '\n' || buffer[i] == '\t' || buffer[i] == ' ') {
-            buffer[i] = '\n';
-            return buffer;
+        else if (token_buffer[i] == '\n' || token_buffer[i] == '\t' || token_buffer[i] == ' ') {
+            token_buffer[i] = '\n';
+            return token_buffer;
         }
         i++;
     }
-
-
-
 }
 
