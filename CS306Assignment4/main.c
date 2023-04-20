@@ -4,12 +4,6 @@
 #include <wait.h>
 
 int main(int argc, char **argv) {
-//    printf(argv[0]);
-//    printf("\n");
-//    printf(argv[1]);
-//    printf("\n");
-//    printf(argv[2]);
-//    printf("\n");
     if (argc <= 1 || argc >= 6) {
         fprintf(stderr, "Incorrect usage. Use between 1 and four filenames.\nusage: %s <filename1> <filename2> <filename3> <filename4>\n", argv[0]);
         exit(-1);
@@ -79,22 +73,19 @@ int main(int argc, char **argv) {
                 perror("Error");
                 exit(1);
             }
-            execl("/bin/ls", "ls", "-l", argv[i+1], NULL); //sends the output to the childs write end
-
+            execl("/bin/ls", "ls", "-l", argv[i+1], NULL); // sends the output to the childs write end
             close(pipes[i][1]);
             exit(0);
         }
     }
-        //Parent
-
-        // close the writing end of all pipes since parent will only read
+    //Parent
+    // close the writing end of all pipes since parent will only read
     for (int i = 0; i < numOfFiles; i++) {
         close(pipes[i][1]);
     }
     int status = 0;
     // Wait for all children to complete
     printf("Parent process (PID: %d) waiting for child processes to complete.\n", getpid());
-
     for (int i = 0; i < numOfFiles; i++) {
         waitpid(pids[i], &status, 0);
         if (WIFEXITED(status)) {
@@ -102,27 +93,16 @@ int main(int argc, char **argv) {
             char data[] = "";
             read(pipes[i][0], data, 100);
             printf("Data from child %d: %s\n", i + 1, data);
+            // when all done, close the reading end
             close(pipes[i][0]);
         } else {
             printf("Child process %d (PID: %d) terminated abnormally\n", i + 1, pids[i]);
         }
     }
-    printf(pipes);
     printf("All child processes completed.\n");
-    // when all done, close the reading end
     exit(EXIT_SUCCESS);
 
 }
-
-// Prints fds for each pipe read and write end
-//    for (int i = 0; i < numOfFiles; i++) {
-//        for (int j = 0; j < 2; j++) {
-//            printf("%d ", pipes[i][j]);
-//        }
-//        printf("\n");
-//    }
-//    return 0;
-//}
 
 
 
