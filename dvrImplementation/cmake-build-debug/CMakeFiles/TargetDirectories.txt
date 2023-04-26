@@ -1,0 +1,3 @@
+/home/afton21/Desktop/CProgramming/dvrImplementation/cmake-build-debug/CMakeFiles/dvrImplementation.dir
+/home/afton21/Desktop/CProgramming/dvrImplementation/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/afton21/Desktop/CProgramming/dvrImplementation/cmake-build-debug/CMakeFiles/rebuild_cache.dir
