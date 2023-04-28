@@ -28,8 +28,8 @@ void *threadhandler(void *input) {
                 count += n;
             }
         }
-        printf("filename: %s\n", ((struct args *) input)->filename);
-        printf("index of file in array: %d\n", ((struct args *) input)->index);
+        // update the pointer of the file to the correct number of bytes
+        printf("%s has %lu bytes\n", ((struct args *) input)->filename, count);
 
         return NULL;
     }
@@ -59,7 +59,6 @@ void *threadhandler(void *input) {
                 pthread_create(&tid, NULL, threadhandler, (void *) file);
                 pthread_join(tid, NULL);
             }
-
             exit(EXIT_SUCCESS);
 
             // print the number of bytes for each file
