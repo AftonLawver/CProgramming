@@ -3,4 +3,4 @@ project(dvrImplementation C)
 
 set(CMAKE_C_STANDARD 17)
 
-add_executable(dvrImplementation main.c)
+add_executable(dvrImplementation main.c new.c)

@@ -1,13 +1,4 @@
 # ninja log v5
-0	26	1682513320866697729	CMakeFiles/dvrImplementation.dir/main.c.o	36b7797fb3188fac
-26	60	1682513320894711729	dvrImplementation	491eb186de131e2a
-0	24	1682885232605661132	CMakeFiles/dvrImplementation.dir/main.c.o	81b2405be9520fd7
-24	36	1682885232617661150	dvrImplementation	491eb186de131e2a
-0	16	1682886744049810569	CMakeFiles/dvrImplementation.dir/main.c.o	81b2405be9520fd7
-16	26	1682886744057810536	dvrImplementation	491eb186de131e2a
-0	15	1682886844344471624	CMakeFiles/dvrImplementation.dir/main.c.o	81b2405be9520fd7
-15	26	1682886844356470076	dvrImplementation	491eb186de131e2a
-0	15	1682886912904101432	CMakeFiles/dvrImplementation.dir/main.c.o	81b2405be9520fd7
-15	26	1682886912916100046	dvrImplementation	491eb186de131e2a
-0	15	1682886927578427906	CMakeFiles/dvrImplementation.dir/main.c.o	81b2405be9520fd7
 15	26	1682886927590426554	dvrImplementation	491eb186de131e2a
+1	185	7046531640433850	CMakeFiles/dvrImplementation.dir/main.c.obj	134c0a5acfd2dc23
+13	190	7046531640541272	CMakeFiles/dvrImplementation.dir/new.c.obj	41e3e471f5dafc09
