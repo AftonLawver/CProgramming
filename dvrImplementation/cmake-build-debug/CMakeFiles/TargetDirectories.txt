@@ -1,3 +1,3 @@
-C:/CProgramming/dvrImplementation/cmake-build-debug/CMakeFiles/dvrImplementation.dir
-C:/CProgramming/dvrImplementation/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/CProgramming/dvrImplementation/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/afton21/Desktop/CProgrammingNew/dvrImplementation/cmake-build-debug/CMakeFiles/dvrImplementation.dir
+/home/afton21/Desktop/CProgrammingNew/dvrImplementation/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/afton21/Desktop/CProgrammingNew/dvrImplementation/cmake-build-debug/CMakeFiles/rebuild_cache.dir
