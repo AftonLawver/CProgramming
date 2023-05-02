@@ -1,4 +1,4 @@
-# Install script for directory: /home/afton21/Desktop/CProgramming/dvrImplementationCpp
+# Install script for directory: /home/afton21/Desktop/CProgrammingNew/dvrImplementationCpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/afton21/Desktop/CProgramming/dvrImplementationCpp/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/afton21/Desktop/CProgrammingNew/dvrImplementationCpp/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

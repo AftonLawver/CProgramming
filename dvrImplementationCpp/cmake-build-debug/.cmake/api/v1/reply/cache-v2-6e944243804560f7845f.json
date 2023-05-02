@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/afton21/Desktop/CProgramming/dvrImplementationCpp/cmake-build-debug"
+			"value" : "/home/afton21/Desktop/CProgrammingNew/dvrImplementationCpp/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -79,7 +79,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "25"
+			"value" : "23"
 		},
 		{
 			"name" : "CMAKE_CACHE_PATCH_VERSION",
@@ -94,18 +94,6 @@
 			"value" : "2"
 		},
 		{
-			"name" : "CMAKE_COLOR_DIAGNOSTICS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Enable colored diagnostics throughout."
-				}
-			],
-			"type" : "BOOL",
-			"value" : "ON"
-		},
-		{
 			"name" : "CMAKE_COMMAND",
 			"properties" : 
 			[
@@ -115,7 +103,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/afton21/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8770.66/bin/cmake/linux/x64/bin/cmake"
+			"value" : "/home/afton21/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/bin/cmake/linux/bin/cmake"
 		},
 		{
 			"name" : "CMAKE_CPACK_COMMAND",
@@ -127,7 +115,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/afton21/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8770.66/bin/cmake/linux/x64/bin/cpack"
+			"value" : "/home/afton21/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/bin/cmake/linux/bin/cpack"
 		},
 		{
 			"name" : "CMAKE_CTEST_COMMAND",
@@ -139,7 +127,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/afton21/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8770.66/bin/cmake/linux/x64/bin/ctest"
+			"value" : "/home/afton21/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/bin/cmake/linux/bin/ctest"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER",
@@ -171,7 +159,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/usr/bin/gcc-ar-9"
+			"value" : "/usr/bin/gcc-ar-11"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER_RANLIB",
@@ -187,7 +175,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/usr/bin/gcc-ranlib-9"
+			"value" : "/usr/bin/gcc-ranlib-11"
 		},
 		{
 			"name" : "CMAKE_CXX_FLAGS",
@@ -299,7 +287,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/usr/bin/gcc-ar-9"
+			"value" : "/usr/bin/gcc-ar-11"
 		},
 		{
 			"name" : "CMAKE_C_COMPILER_RANLIB",
@@ -315,7 +303,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/usr/bin/gcc-ranlib-9"
+			"value" : "/usr/bin/gcc-ranlib-11"
 		},
 		{
 			"name" : "CMAKE_C_FLAGS",
@@ -412,6 +400,18 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "CMAKE_DLLTOOL-NOTFOUND"
+		},
+		{
+			"name" : "CMAKE_EDIT_COMMAND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to cache edit program executable."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/home/afton21/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/bin/cmake/linux/bin/ccmake"
 		},
 		{
 			"name" : "CMAKE_EXECUTABLE_FORMAT",
@@ -534,18 +534,6 @@
 			"value" : ""
 		},
 		{
-			"name" : "CMAKE_FIND_PACKAGE_REDIRECTS_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake."
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/home/afton21/Desktop/CProgramming/dvrImplementationCpp/cmake-build-debug/CMakeFiles/pkgRedirects"
-		},
-		{
 			"name" : "CMAKE_GENERATOR",
 			"properties" : 
 			[
@@ -603,7 +591,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/afton21/Desktop/CProgramming/dvrImplementationCpp"
+			"value" : "/home/afton21/Desktop/CProgrammingNew/dvrImplementationCpp"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -655,7 +643,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "/home/afton21/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8770.66/bin/ninja/linux/x64/ninja"
+			"value" : "/home/afton21/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/bin/ninja/linux/ninja"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -887,7 +875,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/afton21/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8770.66/bin/cmake/linux/x64/share/cmake-3.25"
+			"value" : "/home/afton21/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/bin/cmake/linux/share/cmake-3.23"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1126,18 +1114,6 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "linker supports push/pop state"
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "TRUE"
-		},
-		{
 			"name" : "dvrImplementationCpp_BINARY_DIR",
 			"properties" : 
 			[
@@ -1147,7 +1123,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/afton21/Desktop/CProgramming/dvrImplementationCpp/cmake-build-debug"
+			"value" : "/home/afton21/Desktop/CProgrammingNew/dvrImplementationCpp/cmake-build-debug"
 		},
 		{
 			"name" : "dvrImplementationCpp_IS_TOP_LEVEL",
@@ -1171,7 +1147,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/afton21/Desktop/CProgramming/dvrImplementationCpp"
+			"value" : "/home/afton21/Desktop/CProgrammingNew/dvrImplementationCpp"
 		}
 	],
 	"kind" : "cache",
